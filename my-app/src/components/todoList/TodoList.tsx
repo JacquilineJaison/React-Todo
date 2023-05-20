@@ -5,8 +5,8 @@ interface todo {
   description: string;
 }
 
-function TodoList(prop: todo[]) {
-  const todos = prop.todo.map((todoItem) => {
+function TodoList(list : todo[]) {
+  const todos = list.map((todoItem) => {
     return (
       <Card>
         <CardBody>

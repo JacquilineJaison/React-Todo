@@ -14,7 +14,7 @@ function Todo() {
 
   const saveTodo = () => {
     //save Todo form and show the updated todo list
-
+    setTodos(todos.slice());
   };
 
   return (
