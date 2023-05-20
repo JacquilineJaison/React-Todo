@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 
 interface ButtonProps {
-  saveTodo: React.MouseEventHandler<HTMLButtonElement>;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function TodoForm(prop: ButtonProps) {
@@ -18,7 +18,7 @@ function TodoForm(prop: ButtonProps) {
         <Input type="text" />
         <FormLabel>Description</FormLabel>
         <Input type="text" />
-        <Button colorScheme="blue" onClick={prop.saveTodo}>
+        <Button colorScheme="blue" onClick={prop.onClick}>
           Save
         </Button>
       </FormControl>
