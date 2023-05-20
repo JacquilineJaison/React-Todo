@@ -1,17 +1,12 @@
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Button
-} from "@chakra-ui/react";
+import {Button} from "@chakra-ui/react";
+import  TodoForm from '../todoForm/TodoForm';
 
 function Todo() {
   const createTodo = () => {
     //open Todo form
   };
 
- const  saveTodo = () => {
+  const saveTodo = () => {
     //save Todo form
   };
 
@@ -20,15 +15,7 @@ function Todo() {
       <Button colorScheme="blue" onClick={createTodo}>
         Create Todo
       </Button>
-      <FormControl>
-        <FormLabel>Title</FormLabel>
-        <Input type="text" />
-        <FormLabel>Description</FormLabel>
-        <Input type="text" />
-        <Button colorScheme="blue" onClick={saveTodo}>
-          Save
-        </Button>
-      </FormControl>
+      <TodoForm saveTodo={saveTodo}></TodoForm>
     </>
   );
 }
