@@ -4,12 +4,14 @@ import { Container } from "@chakra-ui/react";
 import TodoForm from "./components/TodoForm/TodoForm";
 import Todos from "./components/Todos/Todos";
 
-const App = () =>{
-  const [todos, setTodos] = useState([{ title: '', description: '' }]);
+const App = () => {
+  const [todos, setTodos] = useState([{ title: "", description: "" }]);
 
-  const saveTodo = () => {
+  const saveTodo = (todoData) => {
     //save Todo form and show the updated todo list
-    setTodos(todos.slice());
+    setTodos((prevTodos) => {
+      return [todoData, ...prevTodos];
+    });
   };
 
   return (
@@ -20,6 +22,6 @@ const App = () =>{
       </Container>
     </ChakraProvider>
   );
-}
+};
 
 export default App;

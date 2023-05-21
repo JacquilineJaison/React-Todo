@@ -26,6 +26,7 @@ const TodoForm = (props) => {
     };
 
     console.log(todoData);
+    props.onClick(todoData);
   };
 
   return (
@@ -36,7 +37,7 @@ const TodoForm = (props) => {
         <Input type="text" value={title} onChange={titleChangeHandler} />
         <FormLabel>Description</FormLabel>
         <Input type="text" value={description} onChange={descriptionChangeHandler}/>
-        <Button colorScheme="blue" type="submit" onClick={props.onClick}>
+        <Button colorScheme="blue" type="submit">
           Save
         </Button>
       </FormControl>
