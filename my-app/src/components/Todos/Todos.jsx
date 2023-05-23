@@ -3,7 +3,7 @@ import "./Todos.css";
 import Wrapper from "../UI/Wrapper/Wrapper";
 
 const Todos = (props) => {
-  const todos = props.items.map((todoItem) => {
+  const todos = props.items.slice(1).map((todoItem) => {
     return (
       <Card className="custom_card" key={Math.random()}>
         <CardBody>
