@@ -1,10 +1,11 @@
-import { Card, CardBody, Text} from "@chakra-ui/react";
+import { Card, CardBody, Text } from "@chakra-ui/react";
+import "./Todos.css";
+import Wrapper from "../UI/Wrapper/Wrapper";
 
-
-const Todos = (props) =>{
+const Todos = (props) => {
   const todos = props.items.map((todoItem) => {
     return (
-      <Card key={Math.random()}>
+      <Card className="custom_card" key={Math.random()}>
         <CardBody>
           <Text>{todoItem.title}</Text>
           <Text>{todoItem.description}</Text>
@@ -12,7 +13,11 @@ const Todos = (props) =>{
       </Card>
     );
   });
-  return <>{todos}</>;
-}
+  return (
+    <>
+      <Wrapper>{todos}</Wrapper>
+    </>
+  );
+};
 
 export default Todos;

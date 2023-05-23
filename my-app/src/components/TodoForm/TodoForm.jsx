@@ -2,8 +2,9 @@ import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { useState } from "react";
 
 const TodoForm = (props) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const titleChangeHandler = (event) => {
     event.preventDefault();
@@ -19,28 +20,34 @@ const TodoForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    
+
     const todoData = {
       title: title,
-      description: description
+      description: description,
     };
 
     console.log(todoData);
+    setTitle("");
+    setDescription("");
     props.onClick(todoData);
   };
 
   return (
     <>
-    <form onSubmit={submitHandler}>
-      <FormControl>
-        <FormLabel>Title</FormLabel>
-        <Input type="text" value={title} onChange={titleChangeHandler} />
-        <FormLabel>Description</FormLabel>
-        <Input type="text" value={description} onChange={descriptionChangeHandler}/>
-        <Button colorScheme="blue" type="submit">
-          Save
-        </Button>
-      </FormControl>
+      <form onSubmit={submitHandler}>
+        <FormControl isRequired isInvalid={isError}>
+          <FormLabel>Title</FormLabel>
+          <Input type="text" value={title} onChange={titleChangeHandler} />
+          <FormLabel>Description</FormLabel>
+          <Input
+            type="text"
+            value={description}
+            onChange={descriptionChangeHandler}
+          />
+          <Button colorScheme="blue" type="submit">
+            Save
+          </Button>
+        </FormControl>
       </form>
     </>
   );
