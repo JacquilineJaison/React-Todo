@@ -3,7 +3,7 @@ import {
   FormControl,
   Input,
   InputLabel,
-  TextField, 
+  TextField,
   Button,
   FormGroup,
   Container,
@@ -47,8 +47,8 @@ const TodoForm = (props) => {
       setTitle("");
       setDescription("");
       setSubmitted(false);
-      setTitleError('');
-      setDescriptionError('');
+      setTitleError("");
+      setDescriptionError("");
 
       props.onClick({
         title: title,
@@ -72,9 +72,8 @@ const TodoForm = (props) => {
                   setTitle(e.target.value);
                   //console.log(title, "title"); this seems to print the stale title value...why? js is runs sequentially
                   console.log(e.target.value, "e.target");
-                  
                 }}
-                onFocus={()=>setTitleError('')}              
+                onFocus={() => setTitleError("")}
               />
               <FormHelperText id="my-helper-text">{titleError}</FormHelperText>
             </FormControl>
@@ -90,9 +89,11 @@ const TodoForm = (props) => {
                   //console.log(description, "description");
                   console.log(e.target.value, "e.target");
                 }}
-                onFocus={()=>setDescriptionError('')} 
+                onFocus={() => setDescriptionError("")}
               />
-              <FormHelperText id="helper_text">{descriptionError}</FormHelperText>
+              <FormHelperText id="helper_text">
+                {descriptionError}
+              </FormHelperText>
             </FormControl>
             <Button type="submit" variant="contained">
               Save
