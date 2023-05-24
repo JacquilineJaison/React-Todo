@@ -8,42 +8,39 @@ import {
   Button,
   FormGroup,
   Container,
+  FormHelperText,
 } from "@mui/material";
 
 const TodoForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [errors, setErrors] = useState({
-    titleError: "",
-    descriptionError: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const [descriptionError, setDescriptionError] = useState("");
+  const [titleError, setTitleError] = useState("");
+
+  //const [submitted, setSubmitted] = useState(false);
 
   const handleValidation = () => {
-    let titleError = null;
-    let descriptionError = null;    
-    
+    let error = null;
+
     if (title.trim().length === 0) {
-      titleError = "Please enter a valid title";
-      console.log(titleError, "titleError");
+      setTitleError("Please enter a valid title");
+      error = true;
     }
     if (description.trim().length === 0) {
-      descriptionError = "Please enter a valid description";
-      console.log(descriptionError, "descriptionError");
+      setDescriptionError("Please enter a valid description");
+      error = true;
     }
 
-    if (titleError || descriptionError) {
-      setErrors({ titleError: titleError, descriptionError: descriptionError });
+    if (error) {      
       return false;
-    }
-    else{
+    } else {
       return true;
     }
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    //setSubmitted(true);
 
     if (handleValidation()) {
       setTitle("");
@@ -62,7 +59,7 @@ const TodoForm = (props) => {
       <Container>
         <form onSubmit={submitHandler}>
           <FormGroup>
-            <FormControl>
+            <FormControl error={titleError.length > 0}>
               <InputLabel htmlFor="title">Title</InputLabel>
               <Input
                 id="title"
@@ -73,10 +70,13 @@ const TodoForm = (props) => {
                   console.log(title, "title");
                 }}
               />
+              <FormHelperText>{titleError}</FormHelperText>
             </FormControl>
-            <FormControl>
+            <FormControl              
+              error={descriptionError.length > 0}
+            >
               <TextField
-                id="outlined-basic"
+                id="description"
                 label="Description"
                 variant="outlined"
                 value={description}
@@ -85,6 +85,7 @@ const TodoForm = (props) => {
                   console.log(description, "description");
                 }}
               />
+              <FormHelperText>{descriptionError}</FormHelperText>
             </FormControl>
             <Button type="submit" variant="contained">
               Save
@@ -98,7 +99,8 @@ const TodoForm = (props) => {
 
 export default TodoForm;
 
-      {/* <form onSubmit={submitHandler}>
+{
+  /* <form onSubmit={submitHandler}>
         <label>Title</label>
         <input
           type="text"
@@ -134,12 +136,15 @@ export default TodoForm;
         <button colorScheme="blue" type="submit">
           Save
         </button>
-      </form> */}
-      {/* <Box
+      </form> */
+}
+{
+  /* <Box
         component="form"
         sx={{
           "& > :not(style)": { m: 1, width: "50ch" },
         }}
         noValidate
         autoComplete="off"
-      > */}
+      > */
+}
