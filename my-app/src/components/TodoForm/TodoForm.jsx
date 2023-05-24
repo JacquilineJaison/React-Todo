@@ -3,8 +3,7 @@ import {
   FormControl,
   Input,
   InputLabel,
-  TextField,
-  Box,
+  TextField, 
   Button,
   FormGroup,
   Container,
@@ -17,11 +16,11 @@ const TodoForm = (props) => {
   const [descriptionError, setDescriptionError] = useState("");
   const [titleError, setTitleError] = useState("");
 
-  //const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleValidation = () => {
     let error = null;
-console.log(title, "title");
+    console.log(title, "title");
     if (title.trim().length === 0) {
       setTitleError("Please enter a valid title");
       error = true;
@@ -32,7 +31,7 @@ console.log(title, "title");
       error = true;
     }
 
-    if (error) {      
+    if (error) {
       return false;
     } else {
       return true;
@@ -41,17 +40,20 @@ console.log(title, "title");
 
   const submitHandler = (event) => {
     event.preventDefault();
-    //setSubmitted(true);
+    setSubmitted(true);
 
     if (handleValidation()) {
+      //form reset
       setTitle("");
       setDescription("");
+      setSubmitted(false);
+      setTitleError('');
+      setDescriptionError('');
+
       props.onClick({
         title: title,
         description: description,
       });
-    } else {
-      //show error messages
     }
   };
 
@@ -63,34 +65,34 @@ console.log(title, "title");
             <FormControl error={titleError.length > 0}>
               <InputLabel htmlFor="title">Title</InputLabel>
               <Input
-                
                 name="title"
                 value={title}
                 aria-describedby="my-helper-text"
                 onChange={(e) => {
                   setTitle(e.target.value);
-                  //console.log(title, "title"); this seems to print the stale title value...why? js is runs sequentially 
+                  //console.log(title, "title"); this seems to print the stale title value...why? js is runs sequentially
                   console.log(e.target.value, "e.target");
+                  
                 }}
+                onFocus={()=>setTitleError('')}              
               />
-              <FormHelperText>{titleError}</FormHelperText>
+              <FormHelperText id="my-helper-text">{titleError}</FormHelperText>
             </FormControl>
-            <FormControl              
-              error={descriptionError.length > 0}
-            >
+            <FormControl error={descriptionError.length > 0}>
               <TextField
-               
                 name="description"
                 label="Description"
                 variant="outlined"
                 value={description}
+                aria-describedby="helper_text"
                 onChange={(e) => {
                   setDescription(e.target.value);
                   //console.log(description, "description");
                   console.log(e.target.value, "e.target");
                 }}
+                onFocus={()=>setDescriptionError('')} 
               />
-              <FormHelperText>{descriptionError}</FormHelperText>
+              <FormHelperText id="helper_text">{descriptionError}</FormHelperText>
             </FormControl>
             <Button type="submit" variant="contained">
               Save
