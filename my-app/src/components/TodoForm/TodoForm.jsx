@@ -21,11 +21,12 @@ const TodoForm = (props) => {
 
   const handleValidation = () => {
     let error = null;
-
+console.log(title, "title");
     if (title.trim().length === 0) {
       setTitleError("Please enter a valid title");
       error = true;
     }
+    console.log(description, "description");
     if (description.trim().length === 0) {
       setDescriptionError("Please enter a valid description");
       error = true;
@@ -56,18 +57,20 @@ const TodoForm = (props) => {
 
   return (
     <>
-      <Container>
+      <Container maxWidth="sm">
         <form onSubmit={submitHandler}>
           <FormGroup>
             <FormControl error={titleError.length > 0}>
               <InputLabel htmlFor="title">Title</InputLabel>
               <Input
-                id="title"
+                
+                name="title"
                 value={title}
                 aria-describedby="my-helper-text"
                 onChange={(e) => {
                   setTitle(e.target.value);
-                  console.log(title, "title");
+                  //console.log(title, "title"); this seems to print the stale title value...why? js is runs sequentially 
+                  console.log(e.target.value, "e.target");
                 }}
               />
               <FormHelperText>{titleError}</FormHelperText>
@@ -76,13 +79,15 @@ const TodoForm = (props) => {
               error={descriptionError.length > 0}
             >
               <TextField
-                id="description"
+               
+                name="description"
                 label="Description"
                 variant="outlined"
                 value={description}
                 onChange={(e) => {
                   setDescription(e.target.value);
-                  console.log(description, "description");
+                  //console.log(description, "description");
+                  console.log(e.target.value, "e.target");
                 }}
               />
               <FormHelperText>{descriptionError}</FormHelperText>

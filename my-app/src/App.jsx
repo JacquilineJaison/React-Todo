@@ -3,7 +3,7 @@ import TodoForm from "./components/TodoForm/TodoForm";
 import Todos from "./components/Todos/Todos";
 
 const App = () => {
-  const [todos, setTodos] = useState([{ title: "", description: "" }]);
+  const [todos, setTodos] = useState([]);
 
   const saveTodo = (todoData) => {
     setTodos((prevTodos) => {
