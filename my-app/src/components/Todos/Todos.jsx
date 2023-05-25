@@ -4,11 +4,11 @@ import "./Todos.css";
 import { Paper, Stack, styled, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 const Todos = (props) => {
   // const Item = styled(Paper)(({ theme }) => ({
@@ -18,17 +18,26 @@ const Todos = (props) => {
   //   textAlign: "center",
   //   color: theme.palette.text.secondary,
   // }));
-  const todos = props.items.map((todoItem,index) => {
+  const todos = props.items.map((todoItem, index) => {
     return (
       <ListItem key={index}>
-        <ListItemButton>         
+        <ListItemButton>
           <ListItemText
             primary={todoItem.title}
             secondary={todoItem.description}
           />
-           <ListItemIcon>
-            <EditIcon onClick={()=>{props.onEdit(index)}}/>
-            <DeleteIcon onClick={()=>{props.onDelete(index)}}/>
+          <ListItemIcon>
+            <EditIcon
+              onClick={() => {
+                props.onEdit(index);
+                //disable edit on this item until edit saved
+              }}
+            />
+            <DeleteIcon
+              onClick={() => {
+                props.onDelete(index);
+              }}
+            />
           </ListItemIcon>
         </ListItemButton>
       </ListItem>

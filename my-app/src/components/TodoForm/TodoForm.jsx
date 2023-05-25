@@ -11,8 +11,10 @@ import {
 } from "@mui/material";
 
 const TodoForm = (props) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const initialTitle = props.title;
+  const initialDescription = props.description;
+  const [title, setTitle] = useState(initialTitle);
+  const [description, setDescription] = useState(initialDescription);
   const [descriptionError, setDescriptionError] = useState("");
   const [titleError, setTitleError] = useState("");
 
