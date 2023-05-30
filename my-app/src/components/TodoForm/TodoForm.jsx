@@ -18,8 +18,6 @@ const TodoForm = (props) => {
   const [descriptionError, setDescriptionError] = useState("");
   const [titleError, setTitleError] = useState("");
 
-  const [submitted, setSubmitted] = useState(false);
-
   const handleValidation = () => {
     let error = null;
     console.log(title, "title");
@@ -108,53 +106,3 @@ const TodoForm = (props) => {
 };
 
 export default TodoForm;
-
-{
-  /* <form onSubmit={submitHandler}>
-        <label>Title</label>
-        <input
-          type="text"
-          value={title}
-          onChange={titleChangeHandler}
-          required
-        />
-        <p
-          className={
-            submitted && Object.keys(errors).length > 0
-              ? "error_show"
-              : "error_hide"
-          }
-        >
-          {errors.titleError}
-        </p>
-        <label>Description</label>
-        <input
-          type="text"
-          value={description}
-          onChange={descriptionChangeHandler}
-          required
-        />
-        <p
-          className={
-            submitted && Object.keys(errors).length > 0
-              ? "error_show"
-              : "error_hide"
-          }
-        >
-          {errors.descriptionError}
-        </p>
-        <button colorScheme="blue" type="submit">
-          Save
-        </button>
-      </form> */
-}
-{
-  /* <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: "50ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      > */
-}

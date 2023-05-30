@@ -28,6 +28,8 @@ const App = () => {
 
   const editTodo = (index) => {
     console.log(index, "index");
+    initialTitle
+    initialDescription
   };
 
   return (
