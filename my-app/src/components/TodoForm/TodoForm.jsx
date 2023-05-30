@@ -13,8 +13,8 @@ import {
 const TodoForm = (props) => {
   const initialTitle = props.title;
   const initialDescription = props.description;
-  const [title, setTitle] = useState(initialTitle);
-  const [description, setDescription] = useState(initialDescription);
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState('');
   const [descriptionError, setDescriptionError] = useState("");
   const [titleError, setTitleError] = useState("");
 
@@ -40,13 +40,11 @@ const TodoForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    setSubmitted(true);
 
     if (handleValidation()) {
       //form reset
       setTitle("");
       setDescription("");
-      setSubmitted(false);
       setTitleError("");
       setDescriptionError("");
 

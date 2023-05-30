@@ -1,5 +1,5 @@
 import "./Todos.css";
-import { Paper, Stack, styled, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import List from "@mui/material/List";
@@ -36,8 +36,6 @@ const Todos = (props) => {
   });
   return (
     <>
-      {/* <Stack spacing={2}>{todos}</Stack> */}
-
       <Box sx={{ width: "100%", maxWidth: 660, bgcolor: "background.paper" }}>
         <nav aria-label="todo list">
           <List>{todos}</List>
