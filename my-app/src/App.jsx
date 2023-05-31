@@ -13,11 +13,9 @@ const App = () => {
 
   const handleInputChange = (e) => {
     setEnteredTodo(e.target.value);
-    console.log(e.target.value, "e.target");
   };
 
   const handleValidation = (text) => {
-    console.log(text, "text");
     const errorMessage = "Please enter a valid todo";
     if (text.trim().length === 0) {
       if (isEditing) {
@@ -54,29 +52,22 @@ const App = () => {
   };
 
   const handleDeleteTodo = (deleteId) => {
-    console.log(deleteId, "deleteId");
-
     setTodos((prevTodos) => {
       const remainingTodos = prevTodos.filter((todo) => {
         if (deleteId !== todo.id) {
           return todo;
         }
-      });
-      console.log(remainingTodos, "remainingTodos");
-
-      return [...remainingTodos];
+      });return [...remainingTodos];
     });
   };
 
   const handleEditTodo = (todoData) => {
-    console.log(todoData, "todoData");
     setIsEditing(true);
     setEditingTodo(todoData);
   };
 
   const handleEditInputChange = (e) => {
     setEditingTodo({ ...editingTodo, text: e.target.value });
-    console.log(editingTodo);
   };
 
   const handleEditCancel = () => {

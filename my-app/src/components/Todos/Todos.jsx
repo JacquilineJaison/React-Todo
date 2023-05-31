@@ -9,7 +9,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 const Todos = ({ items, editStatus, onDelete, onEdit ,editingTodo}) => {
-  console.log(items, "items");
   const todos = items.map((todoItem) => {
     return (
       <ListItem key={todoItem.id}>
@@ -19,7 +18,6 @@ const Todos = ({ items, editStatus, onDelete, onEdit ,editingTodo}) => {
             <EditIcon
               onClick={() => {
                 onEdit(todoItem);
-                //disable edit on this item until edit saved
               }}
             />
             <DeleteIcon
