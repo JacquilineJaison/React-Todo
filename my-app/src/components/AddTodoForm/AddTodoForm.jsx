@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   FormControl,
   Input,
@@ -18,9 +17,9 @@ const AddTodoForm = ({enteredTodo,onInputChange,onSave}) => {
             <FormControl 
            // error={titleError.length > 0}
             >
-              <InputLabel htmlFor="title">Todo</InputLabel>
+              <InputLabel htmlFor="enteredTodo">Todo</InputLabel>
               <Input
-                name="todo"
+                name="enteredTodo"
                 value={enteredTodo}
                 aria-describedby="my-helper-text"
                 onChange={(e) => {

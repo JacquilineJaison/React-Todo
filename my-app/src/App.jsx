@@ -18,13 +18,11 @@ const App = () => {
     console.log(e.target.value, "e.target");
   };
 
-
-
   const handleValidation = (text) => {
     let error = null;
     console.log(text, "text");
     if (text.trim().length === 0) {
-     // setEnteredTodoError("Please enter a valid title");
+      // setEnteredTodoError("Please enter a valid title");
       error = true;
     }
 
@@ -46,9 +44,7 @@ const App = () => {
       setTodos((prevTodos) => {
         return [todoData, ...prevTodos];
       });
-    }
-    else{
-      
+    } else {
     }
   };
 
@@ -73,13 +69,16 @@ const App = () => {
     setCurrentTodo({ ...currentTodo, text: e.target.value });
     console.log(currentTodo);
   }
+  const handleEditCancel= () => {
+    setIsEditing(false);
+  };
 
   return (
     <div>
       {isEditing ? (
         <EditForm
           editingTodo={editingTodo}
-          setIsEditing={setIsEditing}
+          onCancel = {handleEditCancel}
           onEditInputChange={handleEditInputChange}
           onEditSave={handleEditSave}
         />
@@ -90,7 +89,11 @@ const App = () => {
           onSave={handleSaveTodo}
         ></AddTodoForm>
       )}
-      <Todos items={todos} onDelete={handleDeleteTodo} onEdit={handleEditTodo}></Todos>
+      <Todos
+        items={todos}
+        onDelete={handleDeleteTodo}
+        onEdit={handleEditTodo}
+      ></Todos>
     </div>
   );
 };
