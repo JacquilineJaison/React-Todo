@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
 import EditForm from "./components/EditForm/EditForm";
 import Todos from "./components/Todos/Todos";
+import {Container} from "@mui/material";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -57,7 +58,8 @@ const App = () => {
         if (deleteId !== todo.id) {
           return todo;
         }
-      });return [...remainingTodos];
+      });
+      return [...remainingTodos];
     });
   };
 
@@ -94,7 +96,8 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div style={{ paddingTop: "10px" }}>
+      <Container maxWidth="sm">
       {isEditing ? (
         <EditForm
           editingTodo={editingTodo}
@@ -114,13 +117,22 @@ const App = () => {
           clearError={handleClearError}
         ></AddTodoForm>
       )}
-      <Todos
-        items={todos}
-        editStatus={isEditing}
-        onDelete={handleDeleteTodo}
-        onEdit={handleEditTodo}
-        editingTodo={editingTodo}
-      ></Todos>
+      <div style={{paddingTop:"30px"}}>
+      <h3>Todo List</h3>
+      {todos.length > 0 ? (
+        <Todos
+          items={todos}
+          editStatus={isEditing}
+          onDelete={handleDeleteTodo}
+          onEdit={handleEditTodo}
+          editingTodo={editingTodo}
+        ></Todos>
+      ) : (
+        <p>Nothing to display</p>
+      )}
+      </div>
+
+      </Container>
     </div>
   );
 };

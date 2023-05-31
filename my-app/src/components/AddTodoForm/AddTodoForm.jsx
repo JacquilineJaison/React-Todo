@@ -4,7 +4,6 @@ import {
   InputLabel,
   Button,
   FormGroup,
-  Container,
   FormHelperText,
 } from "@mui/material";
 
@@ -18,7 +17,7 @@ const AddTodoForm = ({
 }) => {
   return (
     <>
-      <Container maxWidth="sm">
+        <h1>Create Todo</h1>
         <form onSubmit={onSave}>
           <FormGroup>
             <FormControl error={todoError.length > 0}>
@@ -34,20 +33,23 @@ const AddTodoForm = ({
               />
               <FormHelperText id="my-helper-text">{todoError}</FormHelperText>
             </FormControl>
-            <Button
-              variant="contained"
-              onClick={() => {
-                onCancel();
-              }}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" variant="contained">
-              Save
-            </Button>
+            <span style={{ paddingTop: "10px"}}>
+              <span 
+                style={{paddingRight:"10px"}}><Button
+                variant="contained"
+                onClick={() => {
+                  onCancel();
+                }}
+              >
+                Cancel
+              </Button></span>
+              
+              <Button type="submit" variant="contained">
+                Save
+              </Button>
+            </span>
           </FormGroup>
         </form>
-      </Container>
     </>
   );
 };
