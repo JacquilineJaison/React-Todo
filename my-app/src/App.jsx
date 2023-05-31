@@ -12,7 +12,7 @@ const App = () => {
   const [enteredTodo, setEnteredTodo] = useState("");
   // const [enteredTodoError, setEnteredTodoError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [editingTodo, setEditingTodo] = useState({});
+  const [editingTodo, setEditingTodo] = useState({id:'',text:''});
 
   const handleInputChange = (e) => {
     setEnteredTodo(e.target.value);
@@ -44,12 +44,12 @@ const App = () => {
     }
   };
 
-  const handleDeleteTodo = (index) => {
-    console.log(index, "index");
+  const handleDeleteTodo = (deleteId) => {
+    console.log(deleteId, "deleteId");
 
     setTodos((prevTodos) => {
-      const remainingTodos = prevTodos.filter((todo, idx) => {
-        if (index !== idx){return todo};
+      const remainingTodos = prevTodos.filter((todo) => {
+        if (deleteId !== todo.id){return todo};
       });
       console.log(remainingTodos, "remainingTodos");
 
@@ -57,10 +57,10 @@ const App = () => {
     });
   };
 
-  const handleEditTodo = (index) => {
-    console.log(index, "index");
+  const handleEditTodo = (todoData) => {
+    console.log(todoData, "todoData");
     setIsEditing(true);
-    setEditingTodo(todos[index]);
+    setEditingTodo(todoData);
   };
 
   const handleEditInputChange = (e) => {
@@ -102,6 +102,7 @@ const App = () => {
         editStatus={isEditing}
         onDelete={handleDeleteTodo}
         onEdit={handleEditTodo}
+        editingTodo={editingTodo}
       ></Todos>
     </div>
   );

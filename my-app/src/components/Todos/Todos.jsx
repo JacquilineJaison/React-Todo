@@ -8,25 +8,23 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-const Todos = ({items,editStatus,onDelete,onEdit}) => {
-  console.log(items,"items");
-  const todos = items.map((todoItem, index) => {
+const Todos = ({ items, editStatus, onDelete, onEdit ,editingTodo}) => {
+  console.log(items, "items");
+  const todos = items.map((todoItem) => {
     return (
-      <ListItem key={index} disabled={editStatus}>
-        <ListItemButton>
-          <ListItemText
-            primary={todoItem.text}            
-          />
+      <ListItem key={todoItem.id}>
+        <ListItemButton disabled={editStatus && editingTodo.id === todoItem.id}>
+          <ListItemText primary={todoItem.text} />
           <ListItemIcon>
             <EditIcon
               onClick={() => {
-                onEdit(index);
+                onEdit(todoItem);
                 //disable edit on this item until edit saved
               }}
             />
             <DeleteIcon
               onClick={() => {
-                onDelete(index);
+                onDelete(todoItem.id);
               }}
             />
           </ListItemIcon>
