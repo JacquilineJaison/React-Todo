@@ -8,25 +8,24 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-const Todos = (props) => {
-  const todos = props.items.map((todoItem, index) => {
+const Todos = ({items,onDelete,onEdit}) => {
+  const todos = items.map((todoItem, index) => {
     return (
       <ListItem key={index}>
         <ListItemButton>
           <ListItemText
-            primary={todoItem.title}
-            secondary={todoItem.description}
+            primary={todoItem.text}            
           />
           <ListItemIcon>
             <EditIcon
               onClick={() => {
-                props.onEdit(index);
+                onEdit(index);
                 //disable edit on this item until edit saved
               }}
             />
             <DeleteIcon
               onClick={() => {
-                props.onDelete(index);
+                onDelete(index);
               }}
             />
           </ListItemIcon>

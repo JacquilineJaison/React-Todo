@@ -3,8 +3,8 @@ import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
 import Todos from "./components/Todos/Todos";
 //TODO:
 //CSS
-//array index confusion on deletion fix
 //error message display
+//cancel todo add
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -19,16 +19,12 @@ const App = () => {
   };
 
   const handleValidation = (text) => {
-    let error = null;
     console.log(text, "text");
     if (text.trim().length === 0) {
       // setEnteredTodoError("Please enter a valid title");
-      error = true;
-    }
-
-    if (error) {
       return false;
-    } else {
+    }
+    else{
       return true;
     }
   };
@@ -38,13 +34,12 @@ const App = () => {
 
     if (handleValidation(enteredTodo)) {
       //form reset
-      setTitle("");
-      setEnteredTodoError("");
+      setEnteredTodo("");
+      //setEnteredTodoError("");
 
       setTodos((prevTodos) => {
-        return [todoData, ...prevTodos];
+        return [{ id: new Date(), text: event.target.value }, ...prevTodos];
       });
-    } else {
     }
   };
 
@@ -63,13 +58,16 @@ const App = () => {
 
   const handleEditTodo = (index) => {
     console.log(index, "index");
+    setIsEditing(true);
+    setEditingTodo(todos[index]);
   };
 
-  function handleEditInputChange(e) {
+  const handleEditInputChange = (e) => {
     setCurrentTodo({ ...currentTodo, text: e.target.value });
     console.log(currentTodo);
-  }
-  const handleEditCancel= () => {
+  };
+
+  const handleEditCancel = () => {
     setIsEditing(false);
   };
 
@@ -78,7 +76,7 @@ const App = () => {
       {isEditing ? (
         <EditForm
           editingTodo={editingTodo}
-          onCancel = {handleEditCancel}
+          onCancel={handleEditCancel}
           onEditInputChange={handleEditInputChange}
           onEditSave={handleEditSave}
         />
