@@ -9,53 +9,26 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-const AddTodoForm = (enteredTodo,) => {
-
-  const handleValidation = () => {
-    let error = null;
-    console.log(enteredTodo, "enteredTodo");
-    if (title.trim().length === 0) {
-      setEnteredTodoError("Please enter a valid title");
-      error = true;
-    }
-
-    if (error) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    if (handleValidation()) {
-      //form reset
-      props.reset();
-
-      props.onClick({
-        title: title,
-      });
-    }
-  };
-
+const AddTodoForm = ({enteredTodo,onInputChange,onSave}) => {
   return (
     <>
       <Container maxWidth="sm">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={onSave}>
           <FormGroup>
-            <FormControl error={titleError.length > 0}>
-              <InputLabel htmlFor="title">Title</InputLabel>
+            <FormControl 
+           // error={titleError.length > 0}
+            >
+              <InputLabel htmlFor="title">Todo</InputLabel>
               <Input
-                name="title"
+                name="todo"
                 value={enteredTodo}
                 aria-describedby="my-helper-text"
                 onChange={(e) => {
-                  handleEnteredTodo(e);
+                  onInputChange(e);
                 }}
                 //onFocus={() => setEnteredTodoError("")}
               />
-              <FormHelperText id="my-helper-text">{enteredTodoError}</FormHelperText>
+              {/* <FormHelperText id="my-helper-text">{enteredTodoError}</FormHelperText> */}
             </FormControl>            
             <Button type="submit" variant="contained">
               Save

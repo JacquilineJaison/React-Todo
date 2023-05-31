@@ -13,24 +13,43 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingTodo, setEditingTodo] = useState({});
 
-  const handleEnteredTodo = (e) => {
+  const handleInputChange = (e) => {
     setEnteredTodo(e.target.value);
     console.log(e.target.value, "e.target");
   };
 
-  const handleSaveTodo = (todoData) => {
-    setTodos((prevTodos) => {
-      return [todoData, ...prevTodos];
-    });
+
+
+  const handleValidation = (text) => {
+    let error = null;
+    console.log(text, "text");
+    if (text.trim().length === 0) {
+     // setEnteredTodoError("Please enter a valid title");
+      error = true;
+    }
+
+    if (error) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
-  const resetForm = () => {
-    setTitle("");
-    clearTitleError();
-  };
+  const handleSaveTodo = (event) => {
+    event.preventDefault();
 
-  const clearTitleError = () => {
-    setTitleError("");
+    if (handleValidation(enteredTodo)) {
+      //form reset
+      setTitle("");
+      setEnteredTodoError("");
+
+      setTodos((prevTodos) => {
+        return [todoData, ...prevTodos];
+      });
+    }
+    else{
+      
+    }
   };
 
   const handleDeleteTodo = (index) => {
