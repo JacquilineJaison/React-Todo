@@ -1,8 +1,8 @@
 import { useState } from "react";
-import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
-import EditForm from "./components/EditForm/EditForm";
-import Todos from "./components/Todos/Todos";
-import {Container} from "@mui/material";
+import AddTodoForm from "./components/AddTodoForm";
+import EditForm from "./components/EditForm";
+import Todos from "./components/Todos";
+import { Container } from "@mui/material";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -96,42 +96,41 @@ const App = () => {
   };
 
   return (
-    <div style={{ paddingTop: "10px" }}>
+    <div className="App">
       <Container maxWidth="sm">
-      {isEditing ? (
-        <EditForm
-          editingTodo={editingTodo}
-          onCancel={handleEditCancel}
-          onEditInputChange={handleEditInputChange}
-          onEditSave={handleEditSave}
-          todoEditError={editingTodoError}
-          eraseError={handleEraseError}
-        />
-      ) : (
-        <AddTodoForm
-          enteredTodo={enteredTodo}
-          onInputChange={handleInputChange}
-          onCancel={handleCancel}
-          onSave={handleSaveTodo}
-          todoError={enteredTodoError}
-          clearError={handleClearError}
-        ></AddTodoForm>
-      )}
-      <div style={{paddingTop:"30px"}}>
-      <h3>Todo List</h3>
-      {todos.length > 0 ? (
-        <Todos
-          items={todos}
-          editStatus={isEditing}
-          onDelete={handleDeleteTodo}
-          onEdit={handleEditTodo}
-          editingTodo={editingTodo}
-        ></Todos>
-      ) : (
-        <p>Nothing to display</p>
-      )}
-      </div>
-
+        {isEditing ? (
+          <EditForm
+            editingTodo={editingTodo}
+            onCancel={handleEditCancel}
+            onEditInputChange={handleEditInputChange}
+            onEditSave={handleEditSave}
+            todoEditError={editingTodoError}
+            eraseError={handleEraseError}
+          />
+        ) : (
+          <AddTodoForm
+            enteredTodo={enteredTodo}
+            onInputChange={handleInputChange}
+            onCancel={handleCancel}
+            onSave={handleSaveTodo}
+            todoError={enteredTodoError}
+            clearError={handleClearError}
+          ></AddTodoForm>
+        )}
+        <div className="Todos">
+          <h3>Todo List</h3>
+          {todos.length > 0 ? (
+            <Todos
+              items={todos}
+              editStatus={isEditing}
+              onDelete={handleDeleteTodo}
+              onEdit={handleEditTodo}
+              editingTodo={editingTodo}
+            ></Todos>
+          ) : (
+            <p>Nothing to display</p>
+          )}
+        </div>
       </Container>
     </div>
   );
