@@ -2,17 +2,19 @@ import { useState } from "react";
 import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
 import EditForm from "./components/EditForm/EditForm";
 import Todos from "./components/Todos/Todos";
-//TODO:
+//TODOsssssssssssssssssssss:
+
 //CSS
 //error message display
-//cancel todo add
+//Add a checkbox to the todo Item and a key in the todos array as well indicating the completion/ not done state
 
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [enteredTodo, setEnteredTodo] = useState("");
-  // const [enteredTodoError, setEnteredTodoError] = useState("");
+  const [enteredTodoError, setEnteredTodoError] = useState("");
+  const [editingTodoError, setEditingTodoError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [editingTodo, setEditingTodo] = useState({id:'',text:''});
+  const [editingTodo, setEditingTodo] = useState({ id: "", text: "" });
 
   const handleInputChange = (e) => {
     setEnteredTodo(e.target.value);
@@ -22,12 +24,19 @@ const App = () => {
   const handleValidation = (text) => {
     console.log(text, "text");
     if (text.trim().length === 0) {
-      // setEnteredTodoError("Please enter a valid title");
+      setEnteredTodoError("Please enter a valid todo");
       return false;
-    }
-    else{
+    } else {
       return true;
     }
+  };
+
+  const handleClearError = () => {
+    setEnteredTodoError("");
+  }
+
+  const handleEraseError = () => {
+    setEditingTodoError("");
   };
 
   const handleSaveTodo = (event) => {
@@ -36,7 +45,7 @@ const App = () => {
     if (handleValidation(enteredTodo)) {
       //form reset
       setEnteredTodo("");
-      //setEnteredTodoError("");
+      handleClearError();
 
       setTodos((prevTodos) => {
         return [{ id: new Date(), text: enteredTodo }, ...prevTodos];
@@ -49,7 +58,9 @@ const App = () => {
 
     setTodos((prevTodos) => {
       const remainingTodos = prevTodos.filter((todo) => {
-        if (deleteId !== todo.id){return todo};
+        if (deleteId !== todo.id) {
+          return todo;
+        }
       });
       console.log(remainingTodos, "remainingTodos");
 
@@ -72,14 +83,18 @@ const App = () => {
     setIsEditing(false);
   };
 
-  const handleEditSave = (e)=>{
+  const handleCancel = () => {
+    setEnteredTodo("");
+  };
+
+  const handleEditSave = (e) => {
     e.preventDefault();
     const updatedItem = todos.map((todo) => {
       return todo.id === editingTodo.id ? editingTodo : todo;
     });
     setIsEditing(false);
     setTodos(updatedItem);
-  }
+  };
 
   return (
     <div>
@@ -89,12 +104,17 @@ const App = () => {
           onCancel={handleEditCancel}
           onEditInputChange={handleEditInputChange}
           onEditSave={handleEditSave}
+          todoEditError={editingTodoError}
+          eraseError={handleEraseError}
         />
       ) : (
         <AddTodoForm
           enteredTodo={enteredTodo}
           onInputChange={handleInputChange}
+          onCancel={handleCancel}
           onSave={handleSaveTodo}
+          todoError={enteredTodoError}
+          clearError={handleClearError}
         ></AddTodoForm>
       )}
       <Todos

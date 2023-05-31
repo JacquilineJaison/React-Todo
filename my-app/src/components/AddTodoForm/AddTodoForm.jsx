@@ -8,15 +8,20 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-const AddTodoForm = ({enteredTodo,onInputChange,onSave}) => {
+const AddTodoForm = ({
+  enteredTodo,
+  onInputChange,
+  onCancel,
+  onSave,
+  todoError,
+  clearError,
+}) => {
   return (
     <>
       <Container maxWidth="sm">
         <form onSubmit={onSave}>
           <FormGroup>
-            <FormControl 
-           // error={titleError.length > 0}
-            >
+            <FormControl error={todoError.length > 0}>
               <InputLabel htmlFor="enteredTodo">Todo</InputLabel>
               <Input
                 name="enteredTodo"
@@ -25,10 +30,18 @@ const AddTodoForm = ({enteredTodo,onInputChange,onSave}) => {
                 onChange={(e) => {
                   onInputChange(e);
                 }}
-                //onFocus={() => setEnteredTodoError("")}
+                onFocus={() => clearError()}
               />
-              {/* <FormHelperText id="my-helper-text">{enteredTodoError}</FormHelperText> */}
-            </FormControl>            
+              <FormHelperText id="my-helper-text">{todoError}</FormHelperText>
+            </FormControl>
+            <Button
+              variant="contained"
+              onClick={() => {
+                onCancel();
+              }}
+            >
+              Cancel
+            </Button>
             <Button type="submit" variant="contained">
               Save
             </Button>

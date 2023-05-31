@@ -8,7 +8,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 
-const EditForm = ({editingTodo, onCancel, onEditInputChange, onEditSave}) => {
+const EditForm = ({editingTodo, onCancel, onEditInputChange, onEditSave, todoEditError, eraseError}) => {
   console.log(editingTodo,"editingTodo")
   return (
     <>
@@ -16,7 +16,7 @@ const EditForm = ({editingTodo, onCancel, onEditInputChange, onEditSave}) => {
         <form onSubmit={onEditSave}>
           <FormGroup>
             <FormControl
-            //error={titleError.length > 0}
+            error={todoEditError.length > 0}
             >
               <InputLabel htmlFor="editingTodo">Edit Todo</InputLabel>
               <Input
@@ -26,9 +26,9 @@ const EditForm = ({editingTodo, onCancel, onEditInputChange, onEditSave}) => {
                 onChange={(e) => {
                   onEditInputChange(e);
                 }}
-                //onFocus={() => setTitleError("")}
+                onFocus={() => eraseError()}
               />
-              {/* <FormHelperText id="my-helper-text">{titleError}</FormHelperText> */}
+              <FormHelperText id="my-helper-text">{todoEditError}</FormHelperText>
             </FormControl>
             <Button
               variant="contained"
