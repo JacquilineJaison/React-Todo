@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
+import EditForm from "./components/EditForm/EditForm";
 import Todos from "./components/Todos/Todos";
 //TODO:
 //CSS
@@ -38,7 +39,7 @@ const App = () => {
       //setEnteredTodoError("");
 
       setTodos((prevTodos) => {
-        return [{ id: new Date(), text: event.target.value }, ...prevTodos];
+        return [{ id: new Date(), text: enteredTodo }, ...prevTodos];
       });
     }
   };
@@ -48,7 +49,7 @@ const App = () => {
 
     setTodos((prevTodos) => {
       const remainingTodos = prevTodos.filter((todo, idx) => {
-        if (index !== idx) return todo;
+        if (index !== idx){return todo};
       });
       console.log(remainingTodos, "remainingTodos");
 
@@ -63,13 +64,22 @@ const App = () => {
   };
 
   const handleEditInputChange = (e) => {
-    setCurrentTodo({ ...currentTodo, text: e.target.value });
-    console.log(currentTodo);
+    setEditingTodo({ ...editingTodo, text: e.target.value });
+    console.log(editingTodo);
   };
 
   const handleEditCancel = () => {
     setIsEditing(false);
   };
+
+  const handleEditSave = (e)=>{
+    e.preventDefault();
+    const updatedItem = todos.map((todo) => {
+      return todo.id === editingTodo.id ? editingTodo : todo;
+    });
+    setIsEditing(false);
+    setTodos(updatedItem);
+  }
 
   return (
     <div>
@@ -89,6 +99,7 @@ const App = () => {
       )}
       <Todos
         items={todos}
+        editStatus={isEditing}
         onDelete={handleDeleteTodo}
         onEdit={handleEditTodo}
       ></Todos>

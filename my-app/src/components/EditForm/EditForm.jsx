@@ -1,4 +1,15 @@
-const EditForm = (editingTodo, onEditInputChange, onEditSave) => {
+import {
+  FormControl,
+  Input,
+  InputLabel,
+  Button,
+  FormGroup,
+  Container,
+  FormHelperText,
+} from "@mui/material";
+
+const EditForm = ({editingTodo, onCancel, onEditInputChange, onEditSave}) => {
+  console.log(editingTodo,"editingTodo")
   return (
     <>
       <Container maxWidth="sm">
@@ -10,7 +21,7 @@ const EditForm = (editingTodo, onEditInputChange, onEditSave) => {
               <InputLabel htmlFor="editingTodo">Edit Todo</InputLabel>
               <Input
                 name="editingTodo"
-                value={editingTodo}
+                value={editingTodo.text}
                 aria-describedby="my-helper-text"
                 onChange={(e) => {
                   onEditInputChange(e);

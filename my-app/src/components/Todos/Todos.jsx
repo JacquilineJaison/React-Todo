@@ -8,10 +8,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-const Todos = ({items,onDelete,onEdit}) => {
+const Todos = ({items,editStatus,onDelete,onEdit}) => {
+  console.log(items,"items");
   const todos = items.map((todoItem, index) => {
     return (
-      <ListItem key={index}>
+      <ListItem key={index} disabled={editStatus}>
         <ListItemButton>
           <ListItemText
             primary={todoItem.text}            
