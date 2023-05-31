@@ -2,11 +2,6 @@ import { useState } from "react";
 import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
 import EditForm from "./components/EditForm/EditForm";
 import Todos from "./components/Todos/Todos";
-//TODOsssssssssssssssssssss:
-
-//CSS
-//error message display
-//Add a checkbox to the todo Item and a key in the todos array as well indicating the completion/ not done state
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -23,8 +18,13 @@ const App = () => {
 
   const handleValidation = (text) => {
     console.log(text, "text");
+    const errorMessage = "Please enter a valid todo";
     if (text.trim().length === 0) {
-      setEnteredTodoError("Please enter a valid todo");
+      if (isEditing) {
+        setEditingTodoError(errorMessage);
+      } else {
+        setEnteredTodoError(errorMessage);
+      }
       return false;
     } else {
       return true;
@@ -33,7 +33,7 @@ const App = () => {
 
   const handleClearError = () => {
     setEnteredTodoError("");
-  }
+  };
 
   const handleEraseError = () => {
     setEditingTodoError("");
@@ -89,11 +89,17 @@ const App = () => {
 
   const handleEditSave = (e) => {
     e.preventDefault();
-    const updatedItem = todos.map((todo) => {
-      return todo.id === editingTodo.id ? editingTodo : todo;
-    });
-    setIsEditing(false);
-    setTodos(updatedItem);
+
+    if (handleValidation(editingTodo.text)) {
+      //form reset
+      setEditingTodo("");
+      handleEraseError();
+      const updatedItem = todos.map((todo) => {
+        return todo.id === editingTodo.id ? editingTodo : todo;
+      });
+      setIsEditing(false);
+      setTodos(updatedItem);
+    }
   };
 
   return (

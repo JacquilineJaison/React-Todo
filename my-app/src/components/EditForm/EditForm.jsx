@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 const EditForm = ({editingTodo, onCancel, onEditInputChange, onEditSave, todoEditError, eraseError}) => {
-  console.log(editingTodo,"editingTodo")
+  console.log(todoEditError,"todoEditError")
   return (
     <>
       <Container maxWidth="sm">
