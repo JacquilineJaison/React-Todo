@@ -117,7 +117,7 @@ const App = () => {
             clearError={handleClearError}
           ></AddTodoForm>
         )}
-        <div className="Todos">
+        <div style={{paddingTop:"30px"}}>
           <h3>Todo List</h3>
           {todos.length > 0 ? (
             <Todos
