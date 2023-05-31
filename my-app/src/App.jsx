@@ -1,19 +1,39 @@
 import { useState } from "react";
-import TodoForm from "./components/TodoForm/TodoForm";
+import AddTodoForm from "./components/AddTodoForm/AddTodoForm";
 import Todos from "./components/Todos/Todos";
-//TODO: Implement typescript
-//TODO: CSS
+//TODO:
+//CSS
+//array index confusion on deletion fix
+//error message display
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const [enteredTodo, setEnteredTodo] = useState("");
+  // const [enteredTodoError, setEnteredTodoError] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingTodo, setEditingTodo] = useState({});
 
-  const saveTodo = (todoData) => {
+  const handleEnteredTodo = (e) => {
+    setEnteredTodo(e.target.value);
+    console.log(e.target.value, "e.target");
+  };
+
+  const handleSaveTodo = (todoData) => {
     setTodos((prevTodos) => {
       return [todoData, ...prevTodos];
     });
   };
 
-  const deleteTodo = (index) => {
+  const resetForm = () => {
+    setTitle("");
+    clearTitleError();
+  };
+
+  const clearTitleError = () => {
+    setTitleError("");
+  };
+
+  const handleDeleteTodo = (index) => {
     console.log(index, "index");
 
     setTodos((prevTodos) => {
@@ -26,16 +46,32 @@ const App = () => {
     });
   };
 
-  const editTodo = (index) => {
+  const handleEditTodo = (index) => {
     console.log(index, "index");
-    //initialTitle
-    //initialDescription
   };
+
+  function handleEditInputChange(e) {
+    setCurrentTodo({ ...currentTodo, text: e.target.value });
+    console.log(currentTodo);
+  }
 
   return (
     <div>
-      <TodoForm onClick={saveTodo}></TodoForm>
-      <Todos items={todos} onDelete={deleteTodo} onEdit={editTodo}></Todos>
+      {isEditing ? (
+        <EditForm
+          editingTodo={editingTodo}
+          setIsEditing={setIsEditing}
+          onEditInputChange={handleEditInputChange}
+          onEditSave={handleEditSave}
+        />
+      ) : (
+        <AddTodoForm
+          enteredTodo={enteredTodo}
+          onInputChange={handleInputChange}
+          onSave={handleSaveTodo}
+        ></AddTodoForm>
+      )}
+      <Todos items={todos} onDelete={handleDeleteTodo} onEdit={handleEditTodo}></Todos>
     </div>
   );
 };
