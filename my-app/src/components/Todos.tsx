@@ -6,8 +6,23 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import todo from "../Types.ts";
 
-const Todos = ({ items, editStatus, onDelete, onEdit ,editingTodo}) => {
+type todoProps = {
+  items: todo[];
+  editStatus: boolean;
+  onDelete: (id: string) => void;
+  onEdit: (todoData: todo) => void;
+  editingTodo: todo;
+};
+
+const Todos = ({
+  items,
+  editStatus,
+  onDelete,
+  onEdit,
+  editingTodo,
+}: todoProps) => {
   const todos = items.map((todoItem) => {
     return (
       <ListItem key={todoItem.id}>

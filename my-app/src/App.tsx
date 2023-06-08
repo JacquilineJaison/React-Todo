@@ -3,14 +3,14 @@ import AddTodoForm from "./components/AddTodoForm";
 import EditForm from "./components/EditForm";
 import Todos from "./components/Todos";
 import { Container } from "@mui/material";
-import todo from "./Types.js";
+import todo from "./Types.ts";
 
 const App = () => {
   const [todos, setTodos] = useState<todo[]>([]);
-  const [enteredTodo, setEnteredTodo] = useState("");
-  const [enteredTodoError, setEnteredTodoError] = useState("");
-  const [editingTodoError, setEditingTodoError] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+  const [enteredTodo, setEnteredTodo] = useState<string>("");
+  const [enteredTodoError, setEnteredTodoError] = useState<string>("");
+  const [editingTodoError, setEditingTodoError] = useState<string>("");
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editingTodo, setEditingTodo] = useState<todo>({ id: "", text: "" });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
@@ -53,7 +53,7 @@ const App = () => {
     }
   };
 
-  const handleDeleteTodo = (deleteId: String) => {
+  const handleDeleteTodo = (deleteId: string) => {
     setTodos((prevTodos) => {
       const remainingTodos = prevTodos.filter((todo: todo) => {
         if (deleteId !== todo.id) {
