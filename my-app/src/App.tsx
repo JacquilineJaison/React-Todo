@@ -4,7 +4,7 @@ import EditForm from "./components/EditForm";
 import Todos from "./components/Todos";
 import { Container } from "@mui/material";
 
-type todo = { id: "", text: "" };
+type todo = { id: string, text:string };
 
 const App = () => {
   const [todos, setTodos] = useState<todo[]>([]);
@@ -48,8 +48,8 @@ const App = () => {
       setEnteredTodo("");
       handleClearError();
 
-      setTodos((prevTodos:todo[]) => {
-        return [{ id: new Date(), text: enteredTodo }, ...prevTodos];
+      setTodos((prevTodos) => {
+        return [{ id: new Date().toString(), text: enteredTodo }, ...prevTodos];
       });
     }
   };
