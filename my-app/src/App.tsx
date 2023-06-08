@@ -80,9 +80,9 @@ const App = () => {
   const handleCancel = () => {
     setEnteredTodo("");
   };
-
-  const handleEditSave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  /*React.MouseEvent<HTMLButtonElement>*/
+  const handleEditSave = (e: React.FormEvent<HTMLFormElement>) => {
+    // e.preventDefault();
 
     if (handleValidation(editingTodo.text)) {
       //form reset

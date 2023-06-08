@@ -15,7 +15,7 @@ type EditProps = {
   onEditInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onEditSave: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onEditSave: (e: React.FormEvent<HTMLFormElement>) => void;
   todoEditError: string;
   eraseError: () => void;
 };
@@ -31,7 +31,7 @@ const EditForm = ({
   return (
     <>
       <h1>Edit Todo</h1>
-      <form onSubmit={onEditSave}>
+      <form onSubmit={(e)=>{onEditSave(e)}}>
         <FormGroup>
           <FormControl error={todoEditError.length > 0}>
             <InputLabel htmlFor="editingTodo">Edit Todo</InputLabel>
