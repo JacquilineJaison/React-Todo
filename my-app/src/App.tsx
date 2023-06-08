@@ -3,8 +3,7 @@ import AddTodoForm from "./components/AddTodoForm";
 import EditForm from "./components/EditForm";
 import Todos from "./components/Todos";
 import { Container } from "@mui/material";
-
-type todo = { id: string, text:string };
+import todo from "./Types.js";
 
 const App = () => {
   const [todos, setTodos] = useState<todo[]>([]);
@@ -14,11 +13,11 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingTodo, setEditingTodo] = useState<todo>({ id: "", text: "" });
 
-  const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredTodo(e.target.value);
   };
 
-  const handleValidation = (text:string) => {
+  const handleValidation = (text: string) => {
     const errorMessage = "Please enter a valid todo";
     if (text.trim().length === 0) {
       if (isEditing) {
@@ -40,8 +39,8 @@ const App = () => {
     setEditingTodoError("");
   };
 
-  const handleSaveTodo = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const handleSaveTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
 
     if (handleValidation(enteredTodo)) {
       //form reset
@@ -54,9 +53,9 @@ const App = () => {
     }
   };
 
-  const handleDeleteTodo = (deleteId:String) => {
+  const handleDeleteTodo = (deleteId: String) => {
     setTodos((prevTodos) => {
-      const remainingTodos = prevTodos.filter((todo:todo) => {
+      const remainingTodos = prevTodos.filter((todo: todo) => {
         if (deleteId !== todo.id) {
           return todo;
         }
@@ -65,12 +64,12 @@ const App = () => {
     });
   };
 
-  const handleEditTodo = (todoData:todo) => {
+  const handleEditTodo = (todoData: todo) => {
     setIsEditing(true);
     setEditingTodo(todoData);
   };
 
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     setEditingTodo({ ...editingTodo, text: e.target.value });
   };
 
@@ -82,14 +81,14 @@ const App = () => {
     setEnteredTodo("");
   };
 
-  const handleEditSave = (e:React.MouseEvent<HTMLButtonElement>) => {
+  const handleEditSave = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (handleValidation(editingTodo.text)) {
       //form reset
       setEditingTodo({ id: "", text: "" });
       handleEraseError();
-      const updatedItem = todos.map((todo:todo) => {
+      const updatedItem = todos.map((todo: todo) => {
         return todo.id === editingTodo.id ? editingTodo : todo;
       });
       setIsEditing(false);
@@ -119,7 +118,7 @@ const App = () => {
             clearError={handleClearError}
           ></AddTodoForm>
         )}
-        <div style={{paddingTop:"30px"}}>
+        <div style={{ paddingTop: "30px" }}>
           <h3>Todo List</h3>
           {todos.length > 0 ? (
             <Todos

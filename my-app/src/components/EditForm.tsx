@@ -7,6 +7,19 @@ import {
   FormHelperText,
 } from "@mui/material";
 
+import todo from "../Types.js";
+
+type EditProps = {
+  editingTodo: todo;
+  onCancel: () => void;
+  onEditInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onEditSave: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  todoEditError: string;
+  eraseError: () => void;
+};
+
 const EditForm = ({
   editingTodo,
   onCancel,
@@ -14,7 +27,7 @@ const EditForm = ({
   onEditSave,
   todoEditError,
   eraseError,
-}) => {
+}: EditProps) => {
   return (
     <>
       <h1>Edit Todo</h1>
