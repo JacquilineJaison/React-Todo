@@ -4,19 +4,21 @@ import EditForm from "./components/EditForm";
 import Todos from "./components/Todos";
 import { Container } from "@mui/material";
 
+type todo = { id: "", text: "" };
+
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<todo[]>([]);
   const [enteredTodo, setEnteredTodo] = useState("");
   const [enteredTodoError, setEnteredTodoError] = useState("");
   const [editingTodoError, setEditingTodoError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [editingTodo, setEditingTodo] = useState({ id: "", text: "" });
+  const [editingTodo, setEditingTodo] = useState<todo>({ id: "", text: "" });
 
-  const handleInputChange = (e : ) => {
+  const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setEnteredTodo(e.target.value);
   };
 
-  const handleValidation = (text) => {
+  const handleValidation = (text:string) => {
     const errorMessage = "Please enter a valid todo";
     if (text.trim().length === 0) {
       if (isEditing) {
@@ -38,7 +40,7 @@ const App = () => {
     setEditingTodoError("");
   };
 
-  const handleSaveTodo = (event) => {
+  const handleSaveTodo = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (handleValidation(enteredTodo)) {
@@ -46,15 +48,15 @@ const App = () => {
       setEnteredTodo("");
       handleClearError();
 
-      setTodos((prevTodos) => {
+      setTodos((prevTodos:todo[]) => {
         return [{ id: new Date(), text: enteredTodo }, ...prevTodos];
       });
     }
   };
 
-  const handleDeleteTodo = (deleteId) => {
+  const handleDeleteTodo = (deleteId:String) => {
     setTodos((prevTodos) => {
-      const remainingTodos = prevTodos.filter((todo) => {
+      const remainingTodos = prevTodos.filter((todo:todo) => {
         if (deleteId !== todo.id) {
           return todo;
         }
@@ -63,12 +65,12 @@ const App = () => {
     });
   };
 
-  const handleEditTodo = (todoData) => {
+  const handleEditTodo = (todoData:todo) => {
     setIsEditing(true);
     setEditingTodo(todoData);
   };
 
-  const handleEditInputChange = (e) => {
+  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditingTodo({ ...editingTodo, text: e.target.value });
   };
 
@@ -80,14 +82,14 @@ const App = () => {
     setEnteredTodo("");
   };
 
-  const handleEditSave = (e) => {
+  const handleEditSave = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (handleValidation(editingTodo.text)) {
       //form reset
-      setEditingTodo("");
+      setEditingTodo({ id: "", text: "" });
       handleEraseError();
-      const updatedItem = todos.map((todo) => {
+      const updatedItem = todos.map((todo:todo) => {
         return todo.id === editingTodo.id ? editingTodo : todo;
       });
       setIsEditing(false);
