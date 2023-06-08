@@ -12,7 +12,7 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingTodo, setEditingTodo] = useState({ id: "", text: "" });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e : ) => {
     setEnteredTodo(e.target.value);
   };
 
