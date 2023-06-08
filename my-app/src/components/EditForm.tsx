@@ -31,7 +31,11 @@ const EditForm = ({
   return (
     <>
       <h1>Edit Todo</h1>
-      <form onSubmit={(e)=>{onEditSave(e)}}>
+      <form
+        onSubmit={(e) => {
+          onEditSave(e);
+        }}
+      >
         <FormGroup>
           <FormControl error={todoEditError.length > 0}>
             <InputLabel htmlFor="editingTodo">Edit Todo</InputLabel>

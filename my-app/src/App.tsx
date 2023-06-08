@@ -13,7 +13,7 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingTodo, setEditingTodo] = useState<todo>({ id: "", text: "" });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     setEnteredTodo(e.target.value);
   };
 
@@ -39,7 +39,7 @@ const App = () => {
     setEditingTodoError("");
   };
 
-  const handleSaveTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSaveTodo = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (handleValidation(enteredTodo)) {
@@ -80,7 +80,7 @@ const App = () => {
   const handleCancel = () => {
     setEnteredTodo("");
   };
-  /*React.MouseEvent<HTMLButtonElement>*/
+ 
   const handleEditSave = (e: React.FormEvent<HTMLFormElement>) => {
     // e.preventDefault();
 
